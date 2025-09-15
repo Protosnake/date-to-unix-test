@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "K6 stress testing suite Unix Timestamp Converter",
   "scripts": {
-    "test": "k6 run -e API_URL=https://helloacm.com/api/ tests/*.ts --out json=results.json"
+    "test": "dotenv -f ../../.env -- k6 run tests/*.ts --out json=results.json"
   },
   "keywords": [
     "stress testing",

@@ -5,8 +5,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
-    volumes:
-      - ./frontend:/app
     environment:
       - FRONTEND_URL=http://frontend:3000
       - API_URL=https://helloacm.com/api/
@@ -35,3 +33,5 @@ services:
       dockerfile: ./testing/stress/Dockerfile
     environment:
       - API_URL=https://helloacm.com/api/
+    volumes:
+      - ./testing/stress/reports:/app/testing/stress/reports
