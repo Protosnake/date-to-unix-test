@@ -1,5 +1,5 @@
 import assert from "assert";
-import ApiClient from "../../shared/ApiClient.js";
+import ApiClient from "./ApiClient";
 
 export default class UnixTimestampConverter extends ApiClient {
   constructor(baseUrl?: string | undefined) {

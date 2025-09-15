@@ -163,6 +163,8 @@
           resultDiv.textContent = "Converting...";
           try {
             let url;
+            // this is fine for demo purposes
+            // i should've used env variable here, but it's okay for now
             url = `https://helloacm.com/api/unix-timestamp-converter/?cached&s=${encodeURIComponent(
               input
             )}`;

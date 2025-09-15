@@ -1,0 +1,26 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+    environment:
+      - FRONTEND_URL=http://frontend:3000
+      - API_URL=https://helloacm.com/api/
+
+  integration-tests:
+    build:
+      context: .
+      dockerfile: ./testing/integration/Dockerfile
+    environment:
+      - API_URL=https://helloacm.com/api/
+
+  e2e-tests:
+    build:
+      context: .
+      dockerfile: ./testing/e2e/Dockerfile
+    environment:
+      - FRONTEND_URL=http://frontend:3000

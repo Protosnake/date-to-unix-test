@@ -22,7 +22,7 @@ export default defineConfig({
   forbidOnly: true,
   retries,
   workers,
-  reporter: "html",
+  reporter: [["html", { open: "never" }]],
   use: {
     baseURL: process.env.FRONTEND_URL,
     trace: "on-first-retry",

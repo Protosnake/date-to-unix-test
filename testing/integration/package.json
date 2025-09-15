@@ -1,5 +1,5 @@
 {
-  "name": "integration",
+  "name": "integration-testing",
   "version": "1.0.0",
   "description": "Microservice for running integration tests against the API",
   "scripts": {
