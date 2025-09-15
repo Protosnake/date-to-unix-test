@@ -5,13 +5,13 @@ import http from "k6/http";
 // or decide to switch to another HTTP client library.
 // Currently, it just forwards calls to k6's http module.
 export default class HttpClient {
-  constructor(protected baseUrl?: string) {
-    if (!baseUrl) {
-      baseUrl = __ENV.API_URL;
-    }
+  url: string;
+  constructor(protected route: string) {
+    const baseUrl = __ENV.API_URL;
     if (!baseUrl) {
       throw new Error(`BASE_URL is not provided, please set it in .env file`);
     }
+    this.url = `${baseUrl}${route}`;
   }
   get(...args: Parameters<typeof http.get>) {
     return http.get(...args);

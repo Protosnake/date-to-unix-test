@@ -2,8 +2,8 @@ FROM node:24.8.0-alpine
 
 # Install k6. These commands are for the Alpine Linux OS.
 RUN apk add --no-cache curl && \
-    curl -L https://github.com/grafana/k6/releases/download/v0.50.0/k6-v0.50.0-linux-amd64.tar.gz | tar xz && \
-    mv k6-v0.50.0-linux-amd64/k6 /usr/bin/k6
+    curl -L https://github.com/grafana/k6/releases/download/v1.2.3/k6-v1.2.3-linux-amd64.tar.gz | tar xz && \
+    mv k6-v1.2.3-linux-amd64/k6 /usr/bin/k6
 
 WORKDIR /app
 
