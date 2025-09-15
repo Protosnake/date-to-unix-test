@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Node.js Server</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #f7f7fa;
+        color: #222;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      html {
+        height: 100%;
+      }
+      body > .container {
+        margin: 0;
+      }
+      .container {
+        max-width: 400px;
+        margin: 40px auto;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+        padding: 2em 2em 1.5em 2em;
+      }
+      h1,
+      h2 {
+        text-align: center;
+        margin-top: 0;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.7em;
+      }
+      input[type="text"] {
+        padding: 0.5em;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1em;
+      }
+      label {
+        font-size: 1em;
+      }
+      input[type="radio"] {
+        margin-right: 0.3em;
+      }
+      button[type="submit"] {
+        background: #4f8cff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 0.6em 0;
+        font-size: 1em;
+        cursor: pointer;
+        margin-top: 0.5em;
+        transition: background 0.2s;
+      }
+      button[type="submit"]:hover {
+        background: #2563eb;
+      }
+      #result {
+        background: #f0f4ff;
+        border-radius: 5px;
+        padding: 0.7em;
+        min-height: 1.5em;
+        margin-top: 1em;
+        text-align: center;
+        font-weight: 500;
+        display: none;
+      }
+      #result.visible {
+        display: block;
+      }
+      #result.error {
+        background: #fff0f0;
+        color: #d32f2f;
+        border: 1px solid #f5c2c7;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Unix Timestamp Converter</h2>
+      <form id="converter-form">
+        <label for="inputValue">Enter Value:</label>
+        <input type="text" id="inputValue" name="inputValue" required />
+        <div>
+          <input
+            type="radio"
+            id="toTimestamp"
+            name="direction"
+            value="toTimestamp"
+            checked
+          />
+          <label for="toTimestamp">Date String to Unix Timestamp</label>
+        </div>
+        <div>
+          <input type="radio" id="toDate" name="direction" value="toDate" />
+          <label for="toDate">Unix Timestamp to Date String</label>
+        </div>
+        <button type="submit">Convert</button>
+      </form>
+      <div id="result"></div>
+    </div>
+    <script>
+      document
+        .getElementById("converter-form")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+          const input = document.getElementById("inputValue").value.trim();
+          const direction = document.querySelector(
+            'input[name="direction"]:checked'
+          ).value;
+          const resultDiv = document.getElementById("result");
+          // Date string validation (simple ISO 8601 or yyyy-mm-dd hh:mm:ss)
+          function isValidDateString(str) {
+            // Accepts: 2016-01-01 02:03:22 or 2016-01-01T02:03:22 or 2016-01-01
+            const iso = /^\d{4}-\d{2}-\d{2}(?:[ T]\d{2}:\d{2}(:\d{2})?)?$/;
+            if (!iso.test(str)) return false;
+            const d = new Date(str.replace(" ", "T"));
+            return !isNaN(d.getTime());
+          }
+          if (direction === "toTimestamp") {
+            if (!isValidDateString(input)) {
+              resultDiv.textContent =
+                "Error: Invalid date string format. Use YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.";
+              resultDiv.classList.add("error", "visible");
+              return;
+            }
+          }
+          resultDiv.classList.remove("error");
+          resultDiv.classList.add("visible");
+          resultDiv.textContent = "Converting...";
+          try {
+            let url;
+            url = `https://helloacm.com/api/unix-timestamp-converter/?cached&s=${encodeURIComponent(
+              input
+            )}`;
+            const response = await fetch(url);
+            const data = await response.text();
+            resultDiv.textContent = data.replace(/\"/g, "");
+            resultDiv.classList.add("visible");
+          } catch (err) {
+            resultDiv.textContent = "Error: " + err.message;
+          }
+        });
+    </script>
+  </body>
+</html>
