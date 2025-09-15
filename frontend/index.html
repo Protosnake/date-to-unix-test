@@ -112,6 +112,14 @@
       <div id="result"></div>
     </div>
     <script>
+      document.querySelectorAll('input[name="direction"]').forEach((radio) => {
+        radio.addEventListener("change", (e) => {
+          document
+            .querySelectorAll('input[name="direction"]')
+            .forEach((r) => r.removeAttribute("checked"));
+          e.target.setAttribute("checked", "");
+        });
+      });
       document
         .getElementById("converter-form")
         .addEventListener("submit", async function (e) {
@@ -136,6 +144,13 @@
               resultDiv.classList.add("error", "visible");
               return;
             }
+          } else if (direction === "toDate") {
+            if (!/^\d+$/.test(input)) {
+              resultDiv.textContent =
+                "Error: Invalid timestamp. Please enter a valid number.";
+              resultDiv.classList.add("error", "visible");
+              return;
+            }
           }
           resultDiv.classList.remove("error");
           resultDiv.classList.add("visible");
@@ -147,8 +162,13 @@
             )}`;
             const response = await fetch(url);
             const data = await response.text();
-            resultDiv.textContent = data.replace(/\"/g, "");
-            resultDiv.classList.add("visible");
+            if (data === "false") {
+              resultDiv.textContent = "Error: Invalid input for conversion.";
+              resultDiv.classList.add("error", "visible");
+            } else {
+              resultDiv.textContent = data.replace(/\"/g, "");
+              resultDiv.classList.add("visible");
+            }
           } catch (err) {
             resultDiv.textContent = "Error: " + err.message;
           }

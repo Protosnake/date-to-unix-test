@@ -1,10 +1,11 @@
 {
   "name": "cloud-talk",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Monorepo for hosting frontend and testing Unix Timestamp Converter",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:frontend": "npm run start --prefix ./frontend",
+    "test:integration": "npm run test --prefix ./testing/integration",
+    "test:e2e": "npm run test --prefix ./testing/e2e"
   },
   "keywords": [],
   "author": "",

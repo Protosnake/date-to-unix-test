@@ -2,7 +2,7 @@ import assert from "assert";
 import { suite, test } from "node:test";
 import UnixTimestampConverter from "../../routes/unixTimestampConverter.js";
 
-void suite("Date to Unix coverter", () => {
+void suite("Date to Unix converter", () => {
   const converter = new UnixTimestampConverter(process.env.API_URL);
 
   void test("should convert date string to unix timestamp", async function () {

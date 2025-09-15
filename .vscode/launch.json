@@ -7,10 +7,17 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Node.js Test: Current File",
+      "name": "Integration Test: Current File",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "test",
+        "--prefix",
+        "testing/integration",
+        "--",
+        "${file}"
+      ],
       "skipFiles": ["<node_internals>/**"],
-      "runtimeArgs": ["--test"],
-      "program": "${file}",
       "outFiles": ["${workspaceFolder}/**/*.js"]
     }
   ]

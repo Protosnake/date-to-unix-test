@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Microservice for running integration tests against the API",
   "scripts": {
-    "test": "tsx --test --test-global-setup ./tests/setup.ts"
+    "test": "tsx --test --test-global-setup ./tests/setup.mts"
   },
   "keywords": [
     "integration",

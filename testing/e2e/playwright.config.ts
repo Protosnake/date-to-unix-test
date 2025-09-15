@@ -1,9 +1,10 @@
 import { defineConfig, devices } from "@playwright/test";
+import path from "path";
 
 import dotenv from "dotenv";
-import path from "path";
-dotenv.config({ path: path.resolve(__dirname, ".env") });
+dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
+console.log("base url", process.env.FRONTEND_URL);
 const workers = process.env.PLAYWRIGHT_WORKERS
   ? parseInt(process.env.PLAYWRIGHT_WORKERS)
   : 1;
@@ -23,7 +24,7 @@ export default defineConfig({
   workers,
   reporter: "html",
   use: {
-    baseURL: process.env.BASE_URL,
+    baseURL: process.env.FRONTEND_URL,
     trace: "on-first-retry",
   },
   projects: [
