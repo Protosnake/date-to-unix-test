@@ -17,6 +17,8 @@ services:
       dockerfile: ./testing/integration/Dockerfile
     environment:
       - API_URL=https://helloacm.com/api/
+    volumes:
+      - ./testing/integration/reports:/app/testing/integration/reports
 
   e2e-tests:
     build:
@@ -24,3 +26,12 @@ services:
       dockerfile: ./testing/e2e/Dockerfile
     environment:
       - FRONTEND_URL=http://frontend:3000
+    volumes:
+      - ./testing/e2e/playwright-report/:/app/testing/e2e/playwright-report/
+
+  stress-tests:
+    build:
+      context: .
+      dockerfile: ./testing/stress/Dockerfile
+    environment:
+      - API_URL=https://helloacm.com/api/

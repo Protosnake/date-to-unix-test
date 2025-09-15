@@ -2,8 +2,14 @@ node_modules
 .env
 
 
-# Playwright
+# e2e
 test-results/
 playwright-report/
 blob-report/
 playwright/.cache/
+
+# integration
+reports/
+
+# stress
+testing/stress/results.json

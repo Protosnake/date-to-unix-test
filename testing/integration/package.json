@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Microservice for running integration tests against the API",
   "scripts": {
-    "test": "tsx --test --test-global-setup ./tests/setup.mts"
+    "test": "tsx --test --test-global-setup ./tests/setup.mts --test-reporter=junit --test-reporter-destination=reports/junit.xml --test-reporter=spec --test-reporter-destination=stdout"
   },
   "keywords": [
     "integration",
@@ -11,5 +11,8 @@
     "api"
   ],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "tap-html": "^1.1.0"
+  }
 }

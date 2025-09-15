@@ -1,0 +1,18 @@
+{
+  "name": "stress",
+  "version": "1.0.0",
+  "description": "K6 stress testing suite Unix Timestamp Converter",
+  "scripts": {
+    "test": "k6 run tests/*.ts --out json=results.json"
+  },
+  "keywords": [
+    "stress testing",
+    "k6",
+    "load testing",
+    "performance"
+  ],
+  "license": "ISC",
+  "devDependencies": {
+    "@types/k6": "^1.2.0"
+  }
+}
