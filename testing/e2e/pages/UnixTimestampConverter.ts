@@ -5,6 +5,15 @@ import TextInput from "../components/TextInput";
 import Page from "./Page";
 
 export default class extends Page {
+  static errorsMessages = {
+    emptyInput:
+      "Error: Input cannot be empty. Use 'YYYY-MM-DD HH:MM:SS' format for date strings or a valid number for unix timestamps.",
+    invalidDate:
+      "Error: Invalid date string format. Use 'YYYY-MM-DD HH:MM:SS' format.",
+    invalidTimestamp:
+      "Error: Invalid timestamp. Please enter a valid unix timestamp.",
+  };
+
   constructor(page: Page["page"]) {
     super(page, "/");
   }

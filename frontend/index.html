@@ -92,7 +92,7 @@
       <h2>Unix Timestamp Converter</h2>
       <form id="converter-form">
         <label for="inputValue">Enter Value:</label>
-        <input type="text" id="inputValue" name="inputValue" required />
+        <input type="text" id="inputValue" name="inputValue" />
         <div>
           <input
             type="radio"
@@ -124,7 +124,14 @@
         .getElementById("converter-form")
         .addEventListener("submit", async function (e) {
           e.preventDefault();
+          const defaultFormat = "YYYY-MM-DD HH:MM:SS";
           const input = document.getElementById("inputValue").value.trim();
+          if (!input) {
+            const resultDiv = document.getElementById("result");
+            resultDiv.textContent = `Error: Input cannot be empty. Use '${defaultFormat}' format for date strings or a valid number for unix timestamps.`;
+            resultDiv.classList.add("error", "visible");
+            return;
+          }
           const direction = document.querySelector(
             'input[name="direction"]:checked'
           ).value;
@@ -139,15 +146,14 @@
           }
           if (direction === "toTimestamp") {
             if (!isValidDateString(input)) {
-              resultDiv.textContent =
-                "Error: Invalid date string format. Use YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.";
+              resultDiv.textContent = `Error: Invalid date string format. Use '${defaultFormat}' format.`;
               resultDiv.classList.add("error", "visible");
               return;
             }
           } else if (direction === "toDate") {
             if (!/^\d+$/.test(input)) {
               resultDiv.textContent =
-                "Error: Invalid timestamp. Please enter a valid number.";
+                "Error: Invalid timestamp. Please enter a valid unix timestamp.";
               resultDiv.classList.add("error", "visible");
               return;
             }

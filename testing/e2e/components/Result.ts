@@ -8,6 +8,10 @@ export default class extends Component {
     await this.hasText(text);
     await this.hasNoClass("error");
   }
+  async hasError(text: string) {
+    await this.hasClass("error");
+    await this.hasText(text);
+  }
   async isError() {
     await this.hasClass("error");
   }

@@ -3,6 +3,18 @@ import { describe } from "node:test";
 import UnixTimestampConverter from "../pages/UnixTimestampConverter";
 
 test.describe("Date to Unix converter", () => {
+  test("should error if value input is empty", async ({ page }) => {
+    await new UnixTimestampConverter(page)
+      .visit()
+      .then(async (converterPage) => {
+        await converterPage.valueTextInput.type("");
+        await converterPage.dateToUnixRadioButton.isChecked();
+        await converterPage.convert();
+        await converterPage.result.hasError(
+          UnixTimestampConverter.errorsMessages.emptyInput
+        );
+      });
+  });
   test("should convert date string to unix timestamp", async ({ page }) => {
     await new UnixTimestampConverter(page)
       .visit()
@@ -30,10 +42,9 @@ test.describe("Date to Unix converter", () => {
         await converterPage.valueTextInput.type("asdfasd");
         await converterPage.dateToUnixRadioButton.isChecked();
         await converterPage.convert();
-        await converterPage.result.hasText(
-          "Error: Invalid date string format. Use YYYY-MM-DD or YYYY-MM-DD HH:MM:SS."
+        await converterPage.result.hasError(
+          UnixTimestampConverter.errorsMessages.invalidDate
         );
-        await converterPage.result.isError();
       });
   });
   test("should return an error for invalid unix timestamp", async ({
@@ -45,10 +56,9 @@ test.describe("Date to Unix converter", () => {
         await converterPage.valueTextInput.type("asdfasd");
         await converterPage.unixToDateRadioButton.check();
         await converterPage.convert();
-        await converterPage.result.hasText(
-          "Error: Invalid timestamp. Please enter a valid number."
+        await converterPage.result.hasError(
+          UnixTimestampConverter.errorsMessages.invalidTimestamp
         );
-        await converterPage.result.isError();
       });
   });
 });
