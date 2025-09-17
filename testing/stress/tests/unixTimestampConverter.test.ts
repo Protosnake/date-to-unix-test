@@ -1,5 +1,5 @@
 import { check, group, sleep } from "k6";
-import UnixTimestampConverter from "../routes/unixTimestampConverter";
+import UnixTimestampConverter from "../routes/unixTimestampConverter.ts";
 
 export const options = {
   vus: 10,

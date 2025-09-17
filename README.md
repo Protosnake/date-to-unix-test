@@ -2,6 +2,11 @@
 
 A simple monorepo project with a frontend and a handful of testing modules.
 
+# How to run the project
+`docker compose build --no-cache` should be run only once to build the images.  
+`docker compose up -d` to start the services. Check `docker logs -f <service_name>` to see the logs of testing services.  
+Alternatively, you can run each testing container individually using, doing `docker compose up <service_name>`.
+
 # Frontend
 
 A JS application that wraps around https://helloacm.com/tools/unix-timestamp-converter/ API. More details in the [frontend README](./frontend/README.md).
