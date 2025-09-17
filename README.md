@@ -18,8 +18,8 @@ Each testing module has its own README file with instructions on how to set up a
 
 # Installation
 
-To install root dependencies, run the following commands in the root directory:
-`nvm use` or `nvm install` if you don't have the right version
+To install root dependencies, run the following commands in the root directory:  
+`nvm use` or `nvm install` if you don't have the right version.  
 `npm install`
 
 Then, navigate to each sub-module directory and run `npm install` to install their specific dependencies and follow the instructions in their respective README files.
@@ -39,12 +39,33 @@ Each testing module may require specific environment variables to be set. Refer 
 
 # Strategy & Improvements
 
-Bonus: Strategy & Improvements
+## On scaling test automation across services
 
-- Include a short doc describing your approach to:
-- Scaling test automation across services
-- Avoiding flakiness and ensuring test reliability
-- Balancing unit/integration/E2E tests
-- Ensuring smart test coverage in a growing org
-- Suggest how this API could be improved from a testing or reliability point of
-  view
+- Adopt monorepo structure to share common utilities, components, and configurations.
+- Use containerization (Docker) to ensure consistent test environments.
+- Implement CI/CD pipelines to automate test execution on code changes. (Haven't done this as it is way out of scope for this exercise)
+- Modularize tests to allow easy addition of new services and test cases.
+- We could've adopted bundling tools like turborepo or nx to optimize test runs, but it felt overkill for this exercise.
+
+## On avoiding flakiness and ensuring test reliability
+
+- Use stable selectors and avoid relying on dynamic content in e2e tests. If I wasn't controlling frontend, I would use `data-testid` attributes for stable selectors.
+- Choose playwright as it has auto-waiting mechanisms to handle async operations.
+- Allow passing environment variables to configure timeouts and retries.
+- Regularly review and refactor tests to remove redundant or flaky tests.
+
+## On balancing unit/integration/E2E tests
+
+- It is an ongoin effort. There's no one-size-fits-all solution, but everyone in the org should be aware of the testing pyramid and the importance of each type of test.
+  However, we reduced maintenance cost by using same file names across unit/integration/E2E tests to make it easy to find and relate tests.
+
+## On ensuring smart test coverage in a growing org
+
+- Use code coverage tools to identify untested areas of the codebase. (not in the scope of this exercise)
+- Use the same reporting tool across all testing modules to have a unified view of test coverage. (not in the scope of this exercise)
+
+## On suggesting how this API could be improved from a testing or reliability point of view
+
+- For testing it would be beneficial to be able to deactivate rate limiting and have a sandbox environment.
+- For reliability, the API could provide more detailed error messages and status codes to help identify issues, but `false` works well enough for this exercise.
+- Allow disabling caching for testing purposes, especially for stress tests.

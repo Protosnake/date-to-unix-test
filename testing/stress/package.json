@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "K6 stress testing suite Unix Timestamp Converter",
   "scripts": {
-    "test": "dotenv -f ../../.env -- k6 run tests/*.ts --out json=results.json"
+    "test": "dotenv -f ../../.env -- k6 run tests/*.test.ts --out json=results.json"
   },
   "keywords": [
     "stress testing",
@@ -14,5 +14,8 @@
   "license": "ISC",
   "devDependencies": {
     "@types/k6": "^1.2.0"
+  },
+  "dependencies": {
+    "dotenv-cli": "^10.0.0"
   }
 }

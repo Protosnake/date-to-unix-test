@@ -1,4 +1,4 @@
-import HttpClient from "./HttpClient.ts";
+import HttpClient from "./HttpClient";
 
 export default class UnixTimestampConverter extends HttpClient {
   constructor() {
