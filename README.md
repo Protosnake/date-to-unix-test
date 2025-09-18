@@ -1,6 +1,7 @@
 # Description
 
-A simple monorepo project with a frontend and a handful of testing modules.
+A simple monorepo project that tests https://helloacm.com/tools/unix-timestamp-converter/ API with and adds a simple frontend wrapper around it.  
+The project includes three types of tests: end-to-end (e2e) tests using Playwright, integration tests using NodeJS test runner, and stress tests using k6. Each testing module is isolated in its own directory with its own dependencies to avoid conflicts and ensure modularity.
 
 # How to run everything using Docker
 
