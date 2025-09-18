@@ -1,32 +1,32 @@
 # Description
 
-A simple monorepo project that tests https://helloacm.com/tools/unix-timestamp-converter/ API and adds a simple frontend wrapper around it.  
-The project includes three types of tests: end-to-end (e2e) tests using Playwright, integration tests using NodeJS test runner, and stress tests using k6. Each testing module is isolated in its own directory with its own dependencies to avoid conflicts and ensure modularity.
+A simple monorepo project that tests the https://helloacm.com/tools/unix-timestamp-converter/ API and adds a simple frontend wrapper around it.  
+The project includes three types of tests: End-to-End (E2E) tests using Playwright, integration tests using the Node.js test runner, and stress tests using k6. Each testing module is isolated in its own directory with its own dependencies to avoid conflicts and ensure modularity.
 
-# How to run everything using Docker
+# How to Run Everything Using Docker
 
 Make sure you have Docker and Docker Compose installed.  
-`docker compose build --no-cache` should be run only once to build the images.  
-`docker compose up -d` to start the services. Check `docker logs -f <service_name>` to see the logs of testing services.  
-Alternatively, you can run each testing container individually using, doing `docker compose up <service_name>`.
+Run `docker compose build --no-cache` once to build the images.  
+Use `docker compose up -d` to start the services. Check `docker logs -f <service_name>` to see the logs of testing services.  
+Alternatively, you can run each testing container individually by running `docker compose up <service_name>`.
 
 # Frontend
 
-A JS application that wraps around https://helloacm.com/tools/unix-timestamp-converter/ API. More details in the [frontend README](./frontend/README.md).
+A JavaScript application that wraps around the https://helloacm.com/tools/unix-timestamp-converter/ API. More details are in the [frontend README](./frontend/README.md).
 
 # Testing
 
 The testing modules are located in the `./testing` directory and include:
 
-- End-to-end (e2e) tests using Playwright. More details in the [e2e README](./testing/e2e/README.md).
-- Integration tests using NodeJS test runner. More details in the [integration README](./testing/integration/README.md).
-- Stress tests using k6. More details in the [stress README](./testing/stress/README.md).
+- End-to-End (E2E) tests using Playwright. More details are in the [e2e README](./testing/e2e/README.md).
+- Integration tests using the Node.js test runner. More details are in the [integration README](./testing/integration/README.md).
+- Stress tests using k6. More details are in the [stress README](./testing/stress/README.md).
 
 Each testing module has its own README file with instructions on how to set up and run the tests.
 
 # Installation
 
-To install root dependencies, run the following commands in the root directory:  
+To install root dependencies, run the following commands in the root directory.
 `nvm use` or `nvm install` if you don't have the right version.  
 `npm install`
 
